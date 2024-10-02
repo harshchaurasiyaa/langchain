@@ -103,3 +103,10 @@ async def main(message):
             answer += "\nNo sources found"
 
     await cl.Message(content=answer, elements=text_elements).send()
+
+
+if __name__ == "__main__":
+    # Get the port from the environment variable or default to 8000 for local development
+    port = int(os.environ.get("PORT", 8000))  # Default to 8000 if PORT is not set
+    # Run Chainlit app
+    cl.run('app.py', port=port)
