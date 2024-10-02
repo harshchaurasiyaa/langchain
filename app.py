@@ -19,6 +19,7 @@ from langchain.chains import RetrievalQA
 ABS_PATH: str = os.path.dirname(os.path.abspath(__file__))
 DB_DIR: str = os.path.join(ABS_PATH, "db")
 
+port = os.environ.get("PORT", "5000")
 
 # Set up RetrievelQA model
 rag_prompt_mistral = hub.pull("rlm/rag-prompt-mistral")
@@ -112,5 +113,4 @@ async def main(message):
     await cl.Message(content=answer, elements=text_elements).send()
 
 if __name__ == "__main__":
-    port = os.environ.get("PORT", "5000")
     cl.run_server(debug=True, port=int(port), host="0.0.0.0")
