@@ -2,9 +2,9 @@
 # https://docs.chainlit.io/integrations/langchain
 import os
 
-os.environ["CHAINLIT_HOST"] = "0.0.0.0"
+# os.environ["CHAINLIT_HOST"] = "0.0.0.0"
 
-os.environ["CHAINLIT_PORT"] = os.environ.get("PORT", "5000")
+# os.environ["CHAINLIT_PORT"] = os.environ.get("PORT", "5000")
 
 
 from langchain import hub
@@ -70,7 +70,7 @@ async def start():
     )
     await welcome_message.update()
     cl.user_session.set("chain", chain)
-    print("Using PORT:", os.getenv("PORT"))
+    # print("Using PORT:", os.getenv("PORT"))
 
 
 @cl.on_message
@@ -110,3 +110,7 @@ async def main(message):
             answer += "\nNo sources found"
 
     await cl.Message(content=answer, elements=text_elements).send()
+
+if __name__ == "__main__":
+    port = os.environ.get("PORT", "5000")
+    cl.run_server(debug=True, port=int(port), host="0.0.0.0")
